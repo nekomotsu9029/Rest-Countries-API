@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>REST Countries API</title>
+    
+    <link rel="stylesheet" href="./bootstrap 5/css/bootstrap5.min.css">
+    
+    <link rel="stylesheet" href="./css/style.css">
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">REST Countries API</a>
+      </nav>
+    <div id="app" class="container mt-3">
+        <div class="row bg-white p-3 rounded">
+            <div class="col-lg-4 col-md-6">
+                <label>Selecciona tu Pais</label>
+                <select
+                class="form-select" 
+                aria-label="Default select example"
+                v-model="selectPaises.contenido"
+                v-on:click="actualizarPaisActivo"
+                :disabled="selectPaises.disabled ? '' : false">
+                
+                    <option v-for="item in paises">{{item.name}}</option>
+                  
+                  </select>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label>Selecciona tu estado / departamento</label>
+                <select class="form-select" 
+                aria-label="Default select example"
+                v-model="selectEstados.contenido"
+                v-on:click="actualizarEstadoActivo"
+                :disabled="selectEstados.disabled ? '' : false">
+                    <option v-for="item in estados" v-if="item.id_country==paisActivo.id">
+                        {{item.name}}
+                    </option>
+                  </select>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <label>Selecciona tu ciudad</label>
+                <select class="form-select" 
+                aria-label="Default select example" 
+                v-model="selectCiudades.contenido"
+                v-on:click="actualizarCiudadActiva"
+                :disabled="selectCiudades.disabled ? '' : false">
+                    <option v-for="item in ciudades">{{item.name}}</option>
+                  </select>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-4 mb-2">
+                <div class="card card-body p-3">
+                    <ul>var paisActivo: 
+                        <li>id: {{paisActivo.id}}</li>
+                        <li>name: {{paisActivo.name}}</li>
+                    </ul>
+                </div>                
+            </div>
+            <div class="col-md-4 mb-2">
+                <div class="card card-body p-3">
+                    <ul>var estadoActivo:
+                        <li>id: {{estadoActivo.id}}</li>
+                        <li>name: {{estadoActivo.name}}</li>
+                        <li>id_country: {{estadoActivo.id_country}}</li>
+                    </ul>
+                </div>          
+            </div>
+            <div class="col-md-4 mb-2">
+                <div class="card card-body p-3">
+                    <ul>var ciudadActiva:
+                        <li>id: {{ciudadActiva.id}}</li>
+                        <li>name: {{ciudadActiva.name}}</li>
+                        <li>id_state: {{ciudadActiva.id_state}}</li>
+                    </ul>
+                </div>                              
+            </div>
+        </div>
+    </div>
+    
+    <script src="./bootstrap 5/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="./vue/vue.js"></script>
+    
+    <script src="./vue/axios.min.js"></script>
+    
+    <script src="./js/app.js"></script>
+    
+</body>
+</html>
